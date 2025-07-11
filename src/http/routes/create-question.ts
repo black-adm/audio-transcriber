@@ -25,7 +25,8 @@ export const createQuestionRoute: FastifyPluginCallbackZod = (app) => {
         .values({
           roomId,
           question
-        }).returning()
+        })
+        .returning()
 
       const insertedQuestion = result[0]
 
