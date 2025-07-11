@@ -5,7 +5,7 @@ import { schema } from '../../db/schema/index.ts';
 import {
   generateEmbeddings,
   transcribeAudio,
-} from '../../db/services/gemini.ts';
+} from '../../services/gemini.ts';
 
 export const uploadAudioRoute: FastifyPluginCallbackZod = (app) => {
   app.post(
@@ -26,11 +26,8 @@ export const uploadAudioRoute: FastifyPluginCallbackZod = (app) => {
       }
 
       const audioBuffer = await audio.toBuffer();
-      const audioAsBase64 = audioBuffer.toString('base64');
-      const transcription = await transcribeAudio(
-        audioAsBase64,
-        audio.mimetype
-      );
+      const audioBase64 = audioBuffer.toString('base64');
+      const transcription = await transcribeAudio(audioBase64, audio.mimetype);
 
       if (!transcription) {
         return null;
