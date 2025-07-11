@@ -87,4 +87,6 @@ export async function generateAnswer(
   if (!response.text) {
     throw new Error('Failed generate Gemini response.');
   }
+
+  return response.text
 }
